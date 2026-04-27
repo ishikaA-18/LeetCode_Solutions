@@ -1,0 +1,35 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] result = new int[n][n];
+        int rmin = 0, rmax = n - 1;
+        int cmin = 0, cmax = n - 1;
+        int count=1;
+
+        while (count <= n* n) {
+            // 1. Traverse Right
+            for (int col = cmin; col <= cmax && count <= n* n; col++) {
+                result[rmin][col] = count++;
+            }
+            rmin++;
+
+            // 2. Traverse Down
+            for (int row = rmin; row <= rmax && count <= n* n; row++) {
+                result[row][cmax] = count++;
+            }
+            cmax--;
+
+            // 3. Traverse Left
+            for (int col = cmax; col >= cmin && count <= n* n; col--) {
+                result[rmax][col] = count++;
+            }
+            rmax--;
+
+            // 4. Traverse Up
+            for (int row = rmax; row >= rmin && count <= n* n; row--) {
+                result[row][cmin] = count++;
+            }
+            cmin++;
+        }
+        return result;
+    }
+}
