@@ -1,0 +1,27 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        int n=nums.length;
+        int max=nums[0];
+        int min = nums[0];
+        for(int i=0;i<nums.length;i++){
+            max=Math.max(max,nums[i]);
+            min = Math.min(min, nums[i]);
+        }
+        int range = max - min + 1;
+        int[] p = new int[range];
+        for(int i=0;i<n;i++){
+            p[nums[i] - min]++;
+        }
+        for(int i=1;i<p.length;i++){
+            p[i]=p[i-1]+p[i];
+
+        }
+        int[] ans=new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+        int pos = p[nums[i] - min];  
+        ans[pos - 1] = nums[i];
+        p[nums[i] - min]--;          
+    }
+    return ans;
+    }
+}
